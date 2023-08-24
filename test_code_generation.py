@@ -1,12 +1,12 @@
 # test_code_generation.py
 
 from generate_code import CodeGeneration
-from Docker.DockerFunctions import run_python_in_docker
+from Docker.DockerFunctions import DockerFunctions
 
 if __name__ == "__main__":
     print("Initial testing with Docker...")
     python_code = "print('Hello from Docker!')"
-    docker_test_result = run_python_in_docker(python_code)
+    docker_test_result = DockerFunctions.run_python_in_docker(python_code)
     print(docker_test_result["info"])
     print(docker_test_result["status"])
     print(docker_test_result["code"])

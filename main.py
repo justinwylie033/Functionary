@@ -2,6 +2,7 @@ from fix_code import FixCode
 from Docker.DockerFunctions import DockerFunctions
 from generate_code import CodeGeneration
 from install_packages import install_packages
+from DB.db import FunctionaryDB
 
 
 def execute_and_fix(python_code: str, max_attempts: int = 5):
@@ -51,9 +52,29 @@ if __name__ == "__main__":
 
     print("Docker initialization successful.\n")
 
+    # Initialize the FunctionaryDB
+    db = FunctionaryDB()
+
     # User input for code generation
     initial_prompt = input("Please describe the function you want GPT-4 to generate: ")
+
+    # Check if the function with the given requirements already exists in the database
+    existing_functions = db.query_data(code=initial_prompt)
+    if existing_functions:
+        print("\nFunction already exists in our database!")
+        for func in existing_functions:
+            code, efficiency, output = func
+            print("\nCode:\n", code)
+            print("Efficiency:", efficiency)
+            print("Output:", output)
+        exit()
+
+    # If function doesn't exist, generate, test, and fix it
     result = generate_and_test_code(initial_prompt)
+
+    # Upsert the function into the database
+    print("Adding the function to the functionary ")
+    db.upsert_functions(result["code"], result["efficiency"], result["info"])
 
     print("\nFinal Results:")
     print("----------------")
@@ -61,3 +82,4 @@ if __name__ == "__main__":
     print("Execution Status:", result["status"])
     print("Final Code:\n", result["code"])
     print("Code Efficiency:", result["efficiency"])
+
