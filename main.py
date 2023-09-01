@@ -1,7 +1,8 @@
-from fix_code import FixCode
+from Fixing.FixCode import FixCode
 from Docker.DockerFunctions import DockerFunctions
-from generate_code import CodeGeneration
-from install_packages import install_packages
+from Generation.generate_code import CodeGeneration
+from Analysis.AnalyseCode import CodeAnalyser
+from Installation.install_packages import install_packages
 from DB.db import FunctionaryDB
 
 
@@ -31,7 +32,7 @@ def generate_and_test_code(initial_prompt: str):
     print("\nGenerated Code:\n", python_code)
     
     status, info, final_code = execute_and_fix(python_code)
-    efficiency = CodeGeneration.get_big_o_notation(final_code)
+    efficiency = CodeAnalyser.get_big_o_notation(final_code)
     
     return {
         "info": info,

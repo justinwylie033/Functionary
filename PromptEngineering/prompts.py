@@ -17,7 +17,8 @@ class Prompts:
                     f"  * Unit tests should be FULLY printed, described, clear and interesting for the user\n"
                     f"  * Generated function must be called.\n"
                     f"  * User interaction is not possible, user input/interaction MUST be simulated\n"
-                    f"  ALL DEFINED FUNCTIONS MUST BE CALLED\n\n"
+                    f"  * ALL DEFINED FUNCTIONS MUST BE CALLED\n\n"
+                    f"  * ALL FAILED UNIT TESTS MUST RAISE ERRORS."
                     f"{user_input}")
         
         return template
@@ -46,6 +47,13 @@ class Prompts:
                 f"- NEVER provide any installation commands in the output, I WILL handle this manually. ")
     
     @staticmethod
+    def describe_function(code: str) -> str:
+        return (f"Given the function:\n\n"
+                f"```python\n{code}\n```\n\n"
+                f"Briefly describe its purpose, parameters, return values, and notable behaviors. Avoid verbosity. Should be Simple for A Beginner and around 50 words")
+
+    
+    @staticmethod
     def package_install(code: str) -> str:
         """
         Generates a prompt to determine which packages need to be installed for the given code.
@@ -58,5 +66,5 @@ class Prompts:
         """
         return (f"Given the following Python code:\n\n"
                 f"```python\n{code}\n```\n\n"
-                f"Please provide the EXACT package installation commands (e.g., 'pip install XYZ') required for this code, and NOTHING ELSE. no explamnation, placeholders, instructions, should be directly executable"
+                f"Please provide the EXACT package installation commands (e.g., 'pip install XYZ') required for this code, and NOTHING ELSE. no explanation, placeholders, instructions, should be directly executable"
                 f"if no packages required ONLY return - []")

@@ -1,4 +1,4 @@
-from fix_code import FixCode
+from Fixing.FixCode import FixCode
 from Docker.DockerFunctions import DockerFunctions
 
 def test_fix_functionality():
