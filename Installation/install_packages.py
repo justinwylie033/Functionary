@@ -28,33 +28,40 @@ def install_packages(code):
 def run_tests():
     # Test cases:
     
-    # 1. Code that requires no packages.
+    # 1. Basic Python code that requires no packages.
     test_case_1 = "print('Hello World!')"
     
-    # 2. Code that requires a popular package.
+    # 2. Python code that requires a popular package.
     test_case_2 = "import requests\nresponse = requests.get('https://www.google.com')"
     
-    # 3. Code that requires a less common package.
-    test_case_3 = "import obscure_package\nprint(obscure_package.function())"
+    # 3. JavaScript NodeJS code that requires a popular package.
+    test_case_3 = "const express = require('express');\nconst app = express();"
     
-    # 4. Code that requires multiple packages.
+    # 4. Python code that requires multiple packages.
     test_case_4 = "import requests, pandas\nresponse = requests.get('https://www.google.com')\ndf = pandas.DataFrame([1, 2, 3])"
     
-    # 5. A completely irrelevant text.
-    test_case_5 = "This text should not trigger any installation."
+    # 5. Java code to test if Java dependencies can be recognized.
+    test_case_5 = "import org.apache.commons.lang3.StringUtils;\npublic class Test { public static void main(String[] args) { StringUtils.isBlank('Test'); } }"
     
-    # 6. Code that is incorrectly formatted but should still trigger an installation command.
-    test_case_6 = "import requests\n\nprint(;)"
+    # 6. Ruby code for checking a popular gem.
+    test_case_6 = "require 'sinatra'"
     
-    # 7. A valid code that results in an invalid installation command
-    test_case_7 = "This is a test to check for invalid commands. Install using: nonsense_command package_name."
+    # 7. R code to check if R libraries can be recognized.
+    test_case_7 = "library(ggplot2)"
     
-    # 8. Test with a known error
-    test_case_8 = "Try installing 'fakepackage' which does not exist."
+    # 8. A Perl script that uses a popular module.
+    test_case_8 = "use LWP::Simple;\ngetprint('http://www.example.com');"
+    
+    # 9. PHP code that requires a popular package.
+    test_case_9 = "<?php use GuzzleHttp\Client; ?>"
+    
+    # 10. A code snippet that doesn't correlate to any programming language.
+    test_case_10 = "This is a test to check for invalid commands. Install using: nonsense_command package_name."
 
     test_cases = [
         test_case_1, test_case_2, test_case_3, test_case_4,
-        test_case_5, test_case_6, test_case_7, test_case_8
+        test_case_5, test_case_6, test_case_7, test_case_8,
+        test_case_9, test_case_10
     ]
 
     for idx, test_case in enumerate(test_cases, 1):
