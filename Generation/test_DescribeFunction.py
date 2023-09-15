@@ -1,6 +1,6 @@
 # test_DescribeFunction.py
 
-from DescribeFunction import DescribeFunction
+from Functionary.Generation.DescribeFunction import DescribeFunction
 
 if __name__ == "__main__":
     # Test 1: Generate description for a simple function

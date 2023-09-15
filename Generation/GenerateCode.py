@@ -1,7 +1,7 @@
 from typing import Optional
-from PromptEngineering.prompts import Prompts
-from Utils.utils import Utils
-from Generation.Completions import get_gpt4_completion
+from Functionary.PromptEngineering.prompts import Prompts
+from Functionary.Utils.utils import Utils
+from Functionary.Generation.Completions import get_gpt4_completion
 
 
 

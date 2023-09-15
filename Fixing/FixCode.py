@@ -1,7 +1,7 @@
 from typing import Optional, Dict, Union
-from Generation.Completions import get_gpt4_completion
-from Utils.utils import Utils
-from PromptEngineering.prompts import Prompts
+from Functionary.Generation.Completions import get_gpt4_completion
+from Functionary.Utils.utils import Utils
+from Functionary.PromptEngineering.prompts import Prompts
 
 class FixCode:
     """

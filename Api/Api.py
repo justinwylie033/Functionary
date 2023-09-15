@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
-from DB.db import FunctionaryDB
-from Generation.GenerateCode import CodeGeneration
-from Analysis.AnalyseCode import CodeAnalyser
-from Generation.DescribeFunction import DescribeFunction
-from Docker.DockerFunctions import DockerFunctions
-from Installation.install_packages import install_packages
-from Fixing.FixCode import FixCode
+from Functionary.DB.db import FunctionaryDB
+from Functionary.Generation.GenerateCode import CodeGeneration
+from Functionary.Analysis.AnalyseCode import CodeAnalyser
+from Functionary.Generation.DescribeFunction import DescribeFunction
+from Functionary.Docker.DockerFunctions import DockerFunctions
+from Functionary.Installation.install_packages import install_packages
+from Functionary.Fixing.FixCode import FixCode
 from flask_cors import CORS
 import logging
 from decouple import config
@@ -25,7 +25,7 @@ def install_required_packages(code: str):
 
 def execute_code_in_docker(code: str):
     """Execute python code in Docker and return the result."""
-    return DockerFunctions.run_python_in_docker(code)
+    return DockerFunctions.run_code_in_docker(code)
 
 
 def fix_python_code(code: str, info: str):

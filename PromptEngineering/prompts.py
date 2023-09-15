@@ -61,9 +61,9 @@ class Prompts:
             f"Please provide the EXACT package installation commands (e.g., for Python: 'pip install XYZ', for JavaScript: 'npm install XYZ', etc.) required for this code. No explanation, placeholders, or instructions; it should be directly executable. If no packages are required, ONLY return - []."
         )
     @staticmethod
-    def execution_command(code: str, language: str = 'python') -> str:
+    def execution_command(code: str) -> str:
         return (
-            f"Given the following {language.capitalize()} code:\n\n"
-            f"```{language}\n{code}\n```\n\n"
+            f"Given the following code:\n\n"
+            f"```{code}\n```\n\n"
             f"Provide the EXACT command required to execute this code. No explanation, placeholders, or instructions; it should be directly executable. If no execution command is required, ONLY return - []."
         )

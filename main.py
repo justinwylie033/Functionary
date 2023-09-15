@@ -11,7 +11,7 @@ def execute_and_fix(python_code: str, max_attempts: int = 5):
         print("Installing Packages if necessary...")
         install_packages(python_code)
         
-        execution_result = DockerFunctions.run_python_in_docker(python_code)
+        execution_result = DockerFunctions.run_code_in_docker(python_code)
         
         if execution_result["status"] == "success":
             return "success", execution_result["info"], python_code
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # Initial Docker testing
     print("Initial testing with Docker...")
     python_code = "print('Hello from Docker!')"
-    docker_test_result = DockerFunctions.run_python_in_docker(python_code)
+    docker_test_result = DockerFunctions.run_code_in_docker(python_code)
     
     if docker_test_result["status"] != "success":
         print("Error initializing Docker. Please ensure Docker is running correctly.")

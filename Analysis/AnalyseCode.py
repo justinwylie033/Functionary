@@ -1,6 +1,6 @@
-from typing import Any, Optional
-from PromptEngineering.prompts import Prompts
-from Generation.Completions import get_gpt4_completion
+from typing import Optional
+from Functionary.PromptEngineering.prompts import Prompts
+from Functionary.Generation.Completions import get_gpt4_completion
 
 class CodeAnalyser:
     """

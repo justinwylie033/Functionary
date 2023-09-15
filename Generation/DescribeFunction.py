@@ -1,9 +1,9 @@
 # DescribeFunction.py
 
 from typing import Optional
-from PromptEngineering.prompts import Prompts  # Assuming Prompts is part of this module
-from Utils.utils import Utils
-from Generation.Completions import get_gpt4_completion
+from Functionary.PromptEngineering.prompts import Prompts  # Assuming Prompts is part of this module
+from Functionary.Utils.utils import Utils
+from Functionary.Generation.Completions import get_gpt4_completion
 
 class DescribeFunction:
     """
