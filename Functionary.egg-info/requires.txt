@@ -1,0 +1,13 @@
+docker
+openai
+pinecone-client
+tenacity
+python-decouple
+flask
+flask-cors
+
+[dev]
+check-manifest
+
+[test]
+coverage

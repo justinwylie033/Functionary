@@ -1,0 +1,31 @@
+Metadata-Version: 2.1
+Name: Functionary
+Version: 0.1.0
+Summary: A comprehensive tool for code generation, testing, and storage.
+Home-page: https://github.com/justinwylie033/functionary
+Author: Justin Wylie
+Author-email: justin.wylie@example.com
+License: MIT
+Keywords: code generation,testing,storage,development tools
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: docker
+Requires-Dist: openai
+Requires-Dist: pinecone-client
+Requires-Dist: tenacity
+Requires-Dist: python-decouple
+Requires-Dist: flask
+Requires-Dist: flask-cors
+Provides-Extra: dev
+Requires-Dist: check-manifest; extra == "dev"
+Provides-Extra: test
+Requires-Dist: coverage; extra == "test"
+
+Functionary is a versatile tool designed to streamline the development process, offering features for automatic code generation, rigorous testing, and secure storage of code artifacts. It integrates seamlessly with various external services and provides a user-friendly interface for efficient project management.
