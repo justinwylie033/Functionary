@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
-from Functionary.DB.db import FunctionaryDB
-from Functionary.Generation.GenerateCode import CodeGeneration
-from Functionary.Analysis.AnalyseCode import CodeAnalyser
-from Functionary.Generation.DescribeFunction import DescribeFunction
-from Functionary.Docker.DockerFunctions import DockerFunctions
-from Functionary.Installation.install_packages import install_packages
-from Functionary.Fixing.FixCode import FixCode
+DB.db import FunctionaryDB
+Generation.GenerateCode import CodeGeneration
+Analysis.AnalyseCode import CodeAnalyser
+Generation.DescribeFunction import DescribeFunction
+Docker.DockerFunctions import DockerFunctions
+Installation.install_packages import install_packages
+Fixing.FixCode import FixCode
 from flask_cors import CORS
 import logging
 from decouple import config

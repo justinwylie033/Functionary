@@ -1,51 +1,12 @@
-import docker
-from Functionary.PromptEngineering import prompts
-from Functionary.Generation.Completions import get_gpt4_completion
-
-
-
-
-class DockerClient:
-    """Encapsulates common Docker operations"""
-    
-    client = docker.from_env()
-
-    @staticmethod
-    def ensure_image(image_name: str):
-        if not any([img for img in DockerClient.client.images.list() if image_name in img.tags]):
-            DockerClient.client.images.pull(image_name)
-
-    @staticmethod
-    def remove_container(container):
-        if container:
-            container.remove()
-
-    @staticmethod
-    def execute_in_container(image_name: str, command: str) -> (int, str):
-        container = None
-        try:
-            container = DockerClient.client.containers.create(
-                image=image_name,
-                command=command,
-                detach=True
-            )
-
-            container.start()
-            result = container.wait()
-            exit_code = result['StatusCode']
-
-            if exit_code == 0:
-                return exit_code, container.logs(stdout=True, stderr=False).decode('utf-8').strip()
-            else:
-                return exit_code, container.logs(stdout=False, stderr=True).decode('utf-8').strip()
-
-        finally:
-            DockerClient.remove_container(container)
+from Generation.Generate import Generate
+from Docker.DockerClient import DockerClient
+from Utils.utils import Utils
 
 
 class DockerFunctions:
     def __init__(self, language="python"):
         self.image_name = f"{language}:latest"
+        self.generation = Generate()
 
     def install_packages(self, install_cmd: str):
         DockerClient.ensure_image(self.image_name)
@@ -74,14 +35,31 @@ class DockerFunctions:
         DockerClient.ensure_image(self.image_name)
 
         command = self._get_execution_command(code)
+        if not command:
+            return {
+                "code": code,
+                "info": "No command generated to execute the code.",
+                "status": "failure"
+            }
 
+        print(f"Command to be executed: {command}")
+
+        container = None
         try:
-            exit_code, output = DockerClient.execute_in_container(self.image_name, command)
+            container = DockerClient.client.containers.run(
+                image=self.image_name,
+                command=command,
+                detach=True,
+                stderr=True
+            )
+            exit_code = container.wait()['StatusCode']
+            print(f"Exit code: {exit_code}")
+            output = container.logs(stdout=True, stderr=True).decode('utf-8')
 
             if exit_code == 0:
                 return {
                     "code": code,
-                    "info": output if output else "No output produced.",
+                    "info": output,
                     "status": "success"
                 }
             else:
@@ -96,15 +74,20 @@ class DockerFunctions:
                 "info": str(e),
                 "status": "failure"
             }
+        finally:
+            if container:
+                DockerClient.remove_container(container)
+
+
 
     def _get_execution_command(self, code: str) -> str:
         # You can add more logic here or replace with another function to determine the command
-        return get_gpt4_completion(prompts.execution_command(code))
+        return Utils.code_extractor(self.generation.generate_execution_commmand(code))
 
 
 if __name__ == "__main__":
     # Example of using it for Python
     docker_func = DockerFunctions(language="python")
     docker_func.install_packages("pip install requests")
-    result = docker_func.run_code_in_docker("import requests; print(requests.__version__)")
+    result = docker_func.run_code_in_docker("import requests; print(requests.get('https://www.google.com'))")
     print(result)

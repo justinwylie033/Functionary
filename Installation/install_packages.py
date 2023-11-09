@@ -1,6 +1,6 @@
-from Functionary.Docker.DockerFunctions import DockerFunctions
-from Functionary.PromptEngineering.prompts import Prompts
-from Functionary.Generation.Completions import get_gpt4_completion
+from Docker.DockerFunctions import DockerFunctions
+from PromptEngineering.prompts import Prompts
+from Generation.Complete import get_gpt4_completion
 
 def install_packages(code):
     package_install_prompt = Prompts.package_install(code)

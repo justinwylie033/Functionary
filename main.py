@@ -1,6 +1,6 @@
 from Fixing.FixCode import FixCode
 from Docker.DockerFunctions import DockerFunctions
-from Generation.generate_code import CodeGeneration
+from Generation.Generate import CodeGeneration
 from Analysis.AnalyseCode import CodeAnalyser
 from Installation.install_packages import install_packages
 from DB.db import FunctionaryDB

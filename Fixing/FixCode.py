@@ -1,15 +1,19 @@
 from typing import Optional, Dict, Union
-from Functionary.Generation.Completions import get_gpt4_completion
-from Functionary.Utils.utils import Utils
-from Functionary.PromptEngineering.prompts import Prompts
+from Generation.Complete import Completions
+from Utils.utils import Utils
+from PromptEngineering.prompts import Prompts
 
 class FixCode:
+
+    def __init__(self):
+        self.completions = Completions()
+        
     """
     Handles operations related to correcting code using GPT-4 based on error messages.
     """
     
     @staticmethod
-    def fix_code(python_code: str, error_message: str) -> Dict[str, Union[str, None]]:
+    def fix_code(self, python_code: str, error_message: str) -> Dict[str, Union[str, None]]:
         """
         Attempts to correct the provided code using GPT-4 based on an error message.
 
@@ -23,7 +27,7 @@ class FixCode:
         fix_prompt = Prompts.fix_code(python_code, error_message)
         
         try:
-            corrected_code = Utils.code_extractor(get_gpt4_completion(fix_prompt))
+            corrected_code = Utils.code_extractor(self.completions.get_gpt4_completion(fix_prompt))
             return {
                 "corrected_code": corrected_code
             }

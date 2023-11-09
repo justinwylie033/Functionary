@@ -65,5 +65,5 @@ class Prompts:
         return (
             f"Given the following code:\n\n"
             f"```{code}\n```\n\n"
-            f"Provide the EXACT command required to execute this code. No explanation, placeholders, or instructions; it should be directly executable. If no execution command is required, ONLY return - []."
+            f"Provide the EXACT command required to execute this code within a docker container. No explanation, placeholders, or instructions; it should be directly executable. Format the code in the form of an execution command. If no execution command is required, ONLY return - []."
         )

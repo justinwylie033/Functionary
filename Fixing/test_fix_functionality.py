@@ -1,5 +1,7 @@
-from Functionary.Fixing.FixCode import FixCode
-from Functionary.Docker.DockerFunctions import DockerFunctions
+from Fixing.FixCode import FixCode
+from Docker.DockerFunctions import DockerFunctions
+
+docker = DockerFunctions()
 
 def test_fix_functionality():
     test_cases = [
@@ -48,7 +50,8 @@ def test_fix_functionality():
         attempts = 0
 
         while attempts < max_attempts:
-            execution_result = DockerFunctions.run_code_in_docker(current_code)
+            execution_result = docker.run_code_in_docker(current_code)
+            print(execution_result)
             if execution_result["status"] == "success":
                 print("Code executed successfully without errors.")
                 break
@@ -59,6 +62,8 @@ def test_fix_functionality():
             fix_result = FixCode.fix_code(
                 current_code, execution_result["info"])
             current_code = fix_result["corrected_code"]
+
+            print(fix_result)
 
             # Print the fixed code to the terminal
             print("\n--- Fixed Code (Attempt {}) ---".format(attempts+1))
